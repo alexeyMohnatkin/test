@@ -1,0 +1,14 @@
+.root {
+	display: block;
+	text-align: center;
+	padding: 0 1rem;
+	&:hover {
+		text-decoration: none;
+	}
+}
+
+.title {
+	font-size: 18px;
+}
+
+

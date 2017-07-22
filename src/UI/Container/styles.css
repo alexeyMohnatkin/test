@@ -1,0 +1,15 @@
+@import '../media.css';
+
+.root {
+	width: 100%;
+	max-width: 1040px;
+	min-width: 320px;
+	margin: 0 auto;
+	padding: 0 1rem;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	@media(--md) {
+		padding: 0 2rem;
+	}
+}

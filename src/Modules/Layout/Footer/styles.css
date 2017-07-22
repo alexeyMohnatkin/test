@@ -1,0 +1,17 @@
+@import '@App/UI/colors.css';
+
+.root {
+	position: relative;
+	height: 120px;
+	background: #2e2e2e;
+	color: #fff;
+}
+
+.container {
+	height: 100%;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}

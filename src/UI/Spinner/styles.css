@@ -1,0 +1,17 @@
+.spinner {
+	position: relative;
+	display: inline-block;
+}
+
+.small {
+	size: 20px;
+}
+
+.normal {
+	size: 30px;
+}
+
+.large {
+	size: 40px;
+}
+

@@ -1,0 +1,15 @@
+@import '@App/UI/colors.css';
+
+.root {
+	height: 80px;
+	background-color: #ccc;
+}
+
+.container {
+	height: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}

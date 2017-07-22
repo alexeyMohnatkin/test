@@ -1,0 +1,13 @@
+@import './UI/globals.css';
+
+.root {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex: 1 0 100%;
+}
+
+.page {
+	flex: 1 0 auto;
+	padding: 2rem 0;
+}

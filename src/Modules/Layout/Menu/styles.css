@@ -1,0 +1,27 @@
+.root {
+	/* background: url(App/Images/menu-bg.jpg) center; */
+	background-color: #ccc;
+}
+
+.container {
+	height: 300px;
+}
+
+.menu {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+}
+.menuItem {
+	display: block;
+	color: #fff;
+	text-align: center;
+	text-decoration: none;
+}
+.menuItemTitle {
+	font-size: 18px;
+}
+
+
