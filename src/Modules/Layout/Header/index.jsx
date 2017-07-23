@@ -1,6 +1,6 @@
 // @flow
 
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Container from 'App/UI/Container';
 import Menu from '../Menu';
 import styles from './styles.css';
@@ -34,7 +34,7 @@ const authMenuItems = [{
 },
 ];
 
-class Header extends Component {
+class Header extends PureComponent {
 	render() {
 		return (
 			<header className={styles.root}>

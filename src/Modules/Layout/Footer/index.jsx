@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Container from 'App/UI/Container';
 import styles from './styles.css';
 
-class Footer extends Component {
+class Footer extends PureComponent {
 	render() {
 		return (
 			<div className={styles.root}>

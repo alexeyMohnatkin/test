@@ -7,14 +7,14 @@ import styles from './styles.css';
 import type { TMenuItem } from '../MenuItem';
 
 type TProps = {
-	items: Array<TMenuItem>
-}
+	items: Array<TMenuItem>,
+};
 
 const Menu = ({ items }: TProps) => {
 	return (
 		<div className={styles.root}>
 			<div className={styles.menu}>
-				{items.map((item, key) => <MenuItem key={key} {...item} />)}
+				{items.map((item: TMenuItem, key: number) => <MenuItem key={key} {...item} />)}
 			</div>
 		</div>
 	);

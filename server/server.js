@@ -29,9 +29,6 @@ app.use(serveStatic('build', {
 	maxAge: oneDay,
 }));
 
-createApi(app);
-
-
 const findAssets = () => {
 	if (process.env.NODE_ENV !== 'production') {
 		return {
@@ -52,9 +49,7 @@ const findAssets = () => {
 	}
 };
 
-app.get('/api', (req, res) => {
-	res.send({ message: 'I am a server route and can also be hot reloaded!' });
-});
+createApi(app);
 
 app.get('*', (req, res) => {
 
@@ -86,5 +81,6 @@ app.get('*', (req, res) => {
 	res.send(html);
 
 });
+
 
 export default app;

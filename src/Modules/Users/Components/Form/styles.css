@@ -1,0 +1,13 @@
+.root {
+	margin: 40px 0;
+	padding: 20px;
+	border: 1px solid #ccc;
+}
+.row {
+	display: block;
+	margin-bottom: 16px;
+}
+.fieldTitle {
+	display: inline-block;
+	width: 150px;
+}
