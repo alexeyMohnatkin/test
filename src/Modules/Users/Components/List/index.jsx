@@ -4,7 +4,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Spinner from 'App/UI/Spinner';
 import PagedList from 'App/UI/PagedList';
-import { loadList, deleteItem } from '../../actions';
+import { deleteItem } from '../../actions';
+
 import ListItem from '../ListItem';
 import styles from './styles.css';
 
@@ -29,6 +30,7 @@ class UsersList extends PureComponent {
 		error: string,
 		page: number,
 	};
+	loadList: (page: ?number) => void;
 
 	state = {
 		loading: false,
@@ -44,7 +46,7 @@ class UsersList extends PureComponent {
 	loadList = async (page: number=1) => {
 		this.setState({ loading: true });
 		try {
-			await this.props.loadList({ page });
+			await this.props.loadList(page);
 			this.setState({ loading: false, page });
 		} catch (error) {
 			this.setState({ loading: false });
@@ -78,6 +80,7 @@ class UsersList extends PureComponent {
 			<div className={styles.root}>
 				{error && <div>{error}</div>}
 				{deleteSuccess && <div>User was removed successfully</div>}
+
 				<table className={styles.table}>
 					<thead>
 						<tr>
@@ -87,14 +90,14 @@ class UsersList extends PureComponent {
 						</tr>
 					</thead>
 
-						<PagedList
-							list={usersList.users}
-							renderItem={(user: TUser) => <ListItem key={user._id} user={user} deleteUser={this.deleteUser} />}
-							count={usersList.count}
-							pageCount={usersList.pages}
-							loadPage={this.loadList}
-							currentPage={this.state.page}
-						/>
+					<PagedList
+						list={usersList.users}
+						renderItem={(user: TUser) => <ListItem key={user._id} user={user} deleteUser={this.deleteUser} />}
+						count={usersList.count}
+						pageCount={usersList.pages}
+						loadPage={this.loadList}
+						currentPage={this.state.page}
+					/>
 				</table>
 			</div>
 		);
@@ -107,4 +110,4 @@ function mapStateToProps(state: TReduxState) {
 	};
 }
 
-export default connect(mapStateToProps, { loadList, deleteItem })(UsersList);
+export default connect(mapStateToProps, { deleteItem })(UsersList);

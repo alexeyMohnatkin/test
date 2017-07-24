@@ -22,7 +22,6 @@ class PagedList extends PureComponent {
 
 	loadPage = (event: Event, num: number) => {
 		event.preventDefault();
-		console.log(num);
 		if (num === this.props.currentPage) {
 			return;
 		}

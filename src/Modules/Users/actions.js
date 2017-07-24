@@ -5,10 +5,10 @@ import getError from 'App/Util/getError';
 
 import type { TUser } from './reducer';
 
-export function loadList({ page }) {
+export function loadList({ page=1, filter }: { page?: number, filter: any }) {
 	return async function(dispatch) {
 		try {
-			const params = { page };
+			const params = { page, filter };
 			const users = await axios({
 				url: 'http://localhost:3000/api/users',
 				method: 'get',

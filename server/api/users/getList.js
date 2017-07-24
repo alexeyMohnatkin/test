@@ -2,11 +2,17 @@ import db, { UserSchema } from '../../db';
 const Users = db.model('users', UserSchema);
 
 export default (req, res) => {
-	// const { filter, page } = req.query;
+
+	const { name, email } = JSON.parse(req.query.filter);
+
 	const perPage = 5;
 	const page = req.query.page ? +req.query.page : 1;
+	const query = {
+		name: new RegExp(`^${name}`, 'i'),
+		email: new RegExp(`^${email}`, 'i'),
+	};
 
-	Users.find().limit(perPage)
+	Users.find(query).limit(perPage)
 		.skip(perPage * (page-1))
 		.sort({
 			name: 'asc'
