@@ -5,10 +5,15 @@ import getError from 'App/Util/getError';
 
 import type { TUser } from './reducer';
 
-export function loadList() {
+export function loadList({ page }) {
 	return async function(dispatch) {
 		try {
-			const users = await axios.get('http://localhost:3000/api/users');
+			const params = { page };
+			const users = await axios({
+				url: 'http://localhost:3000/api/users',
+				method: 'get',
+				params,
+			});
 
 			return dispatch({
 				type: t.LOAD_LIST,

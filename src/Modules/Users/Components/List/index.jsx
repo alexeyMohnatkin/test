@@ -3,6 +3,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Spinner from 'App/UI/Spinner';
+import PagedList from 'App/UI/PagedList';
 import { loadList, deleteItem } from '../../actions';
 import ListItem from '../ListItem';
 import styles from './styles.css';
@@ -11,8 +12,13 @@ import type { TReduxState } from 'App/Types/redux';
 import type { TUser } from '../../reducer';
 
 type TProps = {
-	users: Array<TUser>,
-	loadList: () => void,
+	usersList: {
+		users: Array<TUser>,
+		page: number,
+		count: number,
+		pages: number,
+	},
+	loadList: (page: ?number) => void,
 	deleteItem: (id: string) => void,
 };
 
@@ -21,23 +27,25 @@ class UsersList extends PureComponent {
 	state: {
 		loading: boolean,
 		error: string,
+		page: number,
 	};
 
 	state = {
 		loading: false,
 		error: '',
 		deleteSuccess: false,
+		page: 1,
 	};
 
 	componentDidMount() {
 		this.loadList();
 	}
 
-	loadList = async () => {
+	loadList = async (page: number=1) => {
 		this.setState({ loading: true });
 		try {
-			await this.props.loadList();
-			this.setState({ loading: false });
+			await this.props.loadList({ page });
+			this.setState({ loading: false, page });
 		} catch (error) {
 			this.setState({ loading: false });
 			throw error;
@@ -57,10 +65,10 @@ class UsersList extends PureComponent {
 	}
 
 	render() {
-		const { users } = this.props;
+		const { usersList } = this.props;
 		const { error, deleteSuccess } = this.state;
 
-		if (!users) {
+		if (!usersList.users) {
 			return null;
 		}
 		if (this.state.loading) {
@@ -78,9 +86,15 @@ class UsersList extends PureComponent {
 							<th>&nbsp;</th>
 						</tr>
 					</thead>
-					<tbody>
-						{users.map((user: TUser) => <ListItem key={user._id} user={user} deleteUser={this.deleteUser} />)}
-					</tbody>
+
+						<PagedList
+							list={usersList.users}
+							renderItem={(user: TUser) => <ListItem key={user._id} user={user} deleteUser={this.deleteUser} />}
+							count={usersList.count}
+							pageCount={usersList.pages}
+							loadPage={this.loadList}
+							currentPage={this.state.page}
+						/>
 				</table>
 			</div>
 		);
@@ -89,7 +103,7 @@ class UsersList extends PureComponent {
 
 function mapStateToProps(state: TReduxState) {
 	return {
-		users: state.users.list,
+		usersList: state.users.list,
 	};
 }
 

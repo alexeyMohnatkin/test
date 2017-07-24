@@ -12,19 +12,29 @@ export type TUser = {
 };
 
 export type TUsersReducer = {
-	+list: ?Array<TUser>,
+	+list: {
+		+users: ?Array<TUser>,
+		+page: number,
+		+count: number,
+		+pages: number,
+	},
 	+item: ?TUser,
 };
 
 const INITIAL_STATE = {
-	list: null,
+	list: {
+		users: null,
+		page: 0,
+		count: 0,
+		pages: 0,
+	},
 	item: null,
 };
 
 export default (state: TUsersReducer = INITIAL_STATE, action: TReduxAction<*>): TUsersReducer => {
 	switch (action.type) {
 		case t.LOAD_LIST: {
-			const list = action.payload.data.users;
+			const list = action.payload.data;
 
 			return { ...state, list };
 		}
