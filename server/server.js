@@ -12,6 +12,7 @@ import reduxThunk from 'redux-thunk';
 import reducers from 'App/Services/redux';
 import createApi from './api';
 import createPage from './template';
+import { secret } from './config';
 
 const HOT_PORT = process.env.HOT_PORT || 3001;
 
@@ -28,6 +29,8 @@ app.use(bodyParser.json());
 app.use(serveStatic('build', {
 	maxAge: oneDay,
 }));
+
+app.set('secret', secret);
 
 const findAssets = () => {
 	if (process.env.NODE_ENV !== 'production') {

@@ -1,5 +1,6 @@
 export const PERMISSIONS = {
-	ALL: 1,
-	AUTHORIZED: 2,
-	ADMIN: 4,
+	UNAUTHORIZED: 0,
+	ALL: 10,
+	AUTHORIZED: 20,
+	ADMIN: 40,
 };

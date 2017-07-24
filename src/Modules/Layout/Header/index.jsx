@@ -26,7 +26,7 @@ const menuItems = [{
 const authMenuItems = [{
 	title: 'Login',
 	link: '/login',
-	permissions: PERMISSIONS.ALL,
+	permissions: PERMISSIONS.UNAUTHORIZED,
 }, {
 	title: 'Logout',
 	link: '/logout',

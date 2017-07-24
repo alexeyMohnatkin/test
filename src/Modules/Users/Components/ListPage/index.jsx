@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Container from 'App/UI/Container';
+
+import RequireAdmin from 'App/Modules/Auth/Components/RequireAdmin';
 import Filter from '../Filter';
 import { loadList } from '../../actions';
 
 import UsersList from '../List';
 
+@RequireAdmin
 class UsersPage extends PureComponent {
 	loadList: (page: ?number) => void;
 	state = {
@@ -21,7 +23,6 @@ class UsersPage extends PureComponent {
 	}
 
 	loadList = async (page: number=1) => {
-		console.log('load list');
 		try {
 			return await this.props.loadList({ page, filter: this.state.filter });
 		} catch (error) {
@@ -32,12 +33,10 @@ class UsersPage extends PureComponent {
 	render() {
 		return (
 			<div>
-				<Container>
-					<h1>Users</h1>
-					<Filter onChange={this.setFilter} action="/api/users" />
-					<UsersList loadList={this.loadList} />
-					<Link to="/users/add">Add user</Link>
-				</Container>
+				<h1>Users</h1>
+				<Filter onChange={this.setFilter} action="/api/users" />
+				<UsersList loadList={this.loadList} />
+				<Link to="/users/add">Add user</Link>
 			</div>
 		);
 	}

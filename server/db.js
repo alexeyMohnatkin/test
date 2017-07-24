@@ -1,7 +1,7 @@
 import mongoose, { Schema } from 'mongoose';
-// import log from './log';
+import { database } from './config';
 
-mongoose.connect('mongodb://localhost/shakacode');
+mongoose.connect(database);
 const db = mongoose.connection;
 
 db.on('error', function(err) {
@@ -15,18 +15,25 @@ db.once('open', function callback() {
 
 export default db;
 
-
 export const UserSchema = new Schema({
 	name: {
 		type: String,
 		required: 'Name is required',
-		unique: 'Name already exists'
+		unique: 'Name already exists',
 	},
 	email: {
 		type: String,
 		required: 'Email is required',
-		unique: 'Email already registered'
+		unique: 'Email already registered',
 	},
 	password: { type: String, required: true },
-	// buff: Buffer
+	role: {
+		type: String,
+		default: 'user',
+		required: true,
+		enum: {
+			values: ['user', 'admin'],
+			message: 'enum validator failed for path `{PATH}` with value `{VALUE}`',
+		},
+	},
 });

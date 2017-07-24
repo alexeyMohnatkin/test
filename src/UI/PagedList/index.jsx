@@ -36,7 +36,7 @@ class PagedList extends PureComponent {
 				{this.props.list.map(this.props.renderItem)}
 				<tr>
 					<td colSpan="3">
-						{pageCount > 1 && <h4 className={styles.title}>Страницы</h4>}
+						{pageCount > 1 && <h4 className={styles.title}>Pages</h4>}
 						{pageCount > 1 && this.renderPager()}
 					</td>
 				</tr>

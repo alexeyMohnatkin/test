@@ -2,9 +2,9 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Container from 'App/UI/Container';
 import { Link } from 'react-router-dom';
 import Spinner from 'App/UI/Spinner';
+import RequireAdmin from 'App/Modules/Auth/Components/RequireAdmin';
 import { loadItem, addItem } from '../../actions';
 import Form from '../Form';
 import styles from './styles.css';
@@ -28,6 +28,7 @@ type TState = {
 	success: boolean,
 };
 
+@RequireAdmin
 class AddUser extends PureComponent<*, TProps, TState> {
 	props: TProps;
 	state: TState;
@@ -81,20 +82,18 @@ class AddUser extends PureComponent<*, TProps, TState> {
 
 		return (
 			<div className={styles.root}>
-				<Container>
-					<h1>Add user</h1>
-					{this.state.error && <div>{this.state.error}</div>}
-					<Form
-						onSubmit={this.addUser}
-						action="/api/users"
-						fetching={this.state.fetching}
-						onComplete={this.openUserPage}
-						user={user}
-					/>
-					{this.state.fetching && <Container><Spinner /></Container>}
-					{this.state.success && <div>User was added succesfully</div>}
-					<Link to="/users">Back to users list</Link>
-				</Container>
+				<h1>Add user</h1>
+				{this.state.error && <div>{this.state.error}</div>}
+				<Form
+					onSubmit={this.addUser}
+					action="/api/users"
+					fetching={this.state.fetching}
+					onComplete={this.openUserPage}
+					user={user}
+				/>
+				{this.state.fetching && <Spinner />}
+				{this.state.success && <div>User was added succesfully</div>}
+				<Link to="/users">Back to users list</Link>
 			</div>
 		);
 	}

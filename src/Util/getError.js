@@ -18,7 +18,7 @@ export default function handleError(error) {
 			return 'Internal server error, try later';
 		}
 		default: {
-			return DEFAULT_ERROR;
+			return error.response.data.message || DEFAULT_ERROR;
 		}
 	}
 

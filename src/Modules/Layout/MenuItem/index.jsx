@@ -12,14 +12,10 @@ export type TMenuItem = {
 };
 
 const Menu = ({ title, icon, link, permissions }: TMenuItem) => {
-	if (icon) return (
-		<Link to={link} className={styles.root}>
-			<div className={styles.icon} title={title}>{icon}</div>
-		</Link>
-	);
 	return (
 		<Link to={link} className={styles.root}>
-			<div className={styles.title}>{title}</div>
+			{!!icon && <div className={styles.icon} title={title}>{icon}</div>}
+			{!icon && <div className={styles.title}>{title}</div>}
 		</Link>
 	);
 };

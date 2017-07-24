@@ -1,9 +1,9 @@
 // @flow
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import Container from 'App/UI/Container';
 import { Link } from 'react-router-dom';
 import Spinner from 'App/UI/Spinner';
+import RequireAdmin from 'App/Modules/Auth/Components/RequireAdmin';
 import { loadItem, updateItem } from '../../actions';
 import Form from '../Form';
 import styles from './styles.css';
@@ -24,6 +24,7 @@ type TState = {
 	success: boolean,
 };
 
+@RequireAdmin
 class EditUser extends PureComponent<*, TProps, TState> {
 	props: TProps;
 	state: TState;
@@ -78,23 +79,21 @@ class EditUser extends PureComponent<*, TProps, TState> {
 		}
 
 		if (this.state.loading) {
-			return <Container><Spinner /></Container>;
+			return <Spinner />;
 		}
 		return (
 			<div className={styles.root}>
-				<Container>
-					<h1>User {user.name}</h1>
-					{error && <div>{error}</div>}
-					<Form
-						onSubmit={this.updateUser}
-						action={`/api/users/${user._id}`}
-						fetching={this.state.updating}
-						onComplete={this.loadUser}
-						user={user}
-					/>
-					{this.state.success && <div>User was updated succesfully</div>}
-					<Link to="/users">Back to users list</Link>
-				</Container>
+				<h1>User {user.name}</h1>
+				{error && <div>{error}</div>}
+				<Form
+					onSubmit={this.updateUser}
+					action={`/api/users/${user._id}`}
+					fetching={this.state.updating}
+					onComplete={this.loadUser}
+					user={user}
+				/>
+				{this.state.success && <div>User was updated succesfully</div>}
+				<Link to="/users">Back to users list</Link>
 			</div>
 		);
 	}
