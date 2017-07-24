@@ -11,6 +11,7 @@ import EditUser from 'App/Modules/Users/Components/Edit';
 import AddUser from 'App/Modules/Users/Components/Add';
 import Login from 'App/Modules/Auth/Components/Login';
 import Logout from 'App/Modules/Auth/Components/Logout';
+import Register from 'App/Modules/Auth/Components/Register';
 import Page404 from 'App/Modules/Layout/404';
 
 const App = () => (
@@ -24,6 +25,7 @@ const App = () => (
 					<Route exact path="/users/:id" component={EditUser}/>
 					<Route exact path="/login" component={Login}/>
 					<Route exact path="/logout" component={Logout}/>
+					<Route exact path="/register" component={Register}/>
 					<Route status={404} component={Page404}/>
 				</Switch>
 			</Page>

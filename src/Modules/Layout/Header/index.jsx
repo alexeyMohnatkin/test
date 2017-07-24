@@ -28,6 +28,10 @@ const authMenuItems = [{
 	link: '/login',
 	permissions: PERMISSIONS.UNAUTHORIZED,
 }, {
+	title: 'Register',
+	link: '/register',
+	permissions: PERMISSIONS.UNAUTHORIZED,
+}, {
 	title: 'Logout',
 	link: '/logout',
 	permissions: PERMISSIONS.AUTHORIZED,

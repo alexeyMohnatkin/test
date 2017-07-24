@@ -20,6 +20,16 @@ export function login(email: string, password: string) {
 	};
 }
 
+export function register(name: string, email: string, password: string) {
+	return async function(dispatch) {
+		try {
+			return await axios.post('/api/register', { name, email, password });
+		} catch (error) {
+			throw getError(error);
+		}
+	};
+}
+
 export function logout() {
 	return function(dispatch) {
 		localStorage.removeItem('token');

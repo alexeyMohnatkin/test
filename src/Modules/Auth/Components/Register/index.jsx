@@ -1,22 +1,24 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styles from './styles.css';
 
-import { login } from '../../actions';
+import { register } from '../../actions';
 
 type TProps = {
-	login: (email: string, password: string) => void,
+	register: (name: string, email: string, password: string) => void,
 };
 type TState = {
+	name: string,
 	email: string,
 	password: string,
 	error: string,
+	success: boolean,
 };
 
-class Login extends PureComponent {
+class Register extends PureComponent {
 
 	props: TProps;
 	state: TState;
@@ -24,20 +26,17 @@ class Login extends PureComponent {
 	onChangePassword: (password: string) => void;
 	submit: () => void;
 
-	context: {
-		router: any,
-	};
-
-	static contextTypes = {
-		router: PropTypes.object
-	};
-
 	state = {
+		name: '',
 		email: '',
 		password: '',
 		error: '',
+		success: false,
 	};
 
+	onChangeName = (event: Event & { currentTarget: HTMLInputElement }) => {
+		this.setState({ name: event.currentTarget.value });
+	}
 	onChangeEmail = (event: Event & { currentTarget: HTMLInputElement }) => {
 		this.setState({ email: event.currentTarget.value });
 	}
@@ -47,23 +46,39 @@ class Login extends PureComponent {
 
 	submit = async (event: Event) => {
 		event.preventDefault();
-		const { email, password } = this.state;
+		const { name, email, password } = this.state;
 
 		try {
-			await this.props.login(email, password);
-			this.context.router.history.push('/');
+			await this.props.register(name, email, password);
+			this.setState({ success: true });
 		} catch (error) {
 			this.setState({ error });
 		}
 	}
 
 	render() {
-		const { email, password, error } = this.state;
+		const { name, email, password, error, success } = this.state;
 
+		if (success) {
+			return (
+				<div>
+					<h4>Congratuations!</h4>
+					<p>Now try to <Link to="/login">login</Link></p>
+				</div>
+			);
+		}
 		return (
 			<div>
 				{error && <div>{error}</div>}
 				<form onSubmit={this.submit}>
+					<label className={styles.row}>
+						<span className={styles.fieldTitle}>Name: </span>
+						<input
+							name="name"
+							type="text"
+							onChange={this.onChangeName} value={name}
+						/>
+					</label>
 					<label className={styles.row}>
 						<span className={styles.fieldTitle}>Email: </span>
 						<input
@@ -81,11 +96,11 @@ class Login extends PureComponent {
 							value={password}
 						/>
 					</label>
-					<button type="submit">Sign in</button>
+					<button type="submit">Sign up</button>
 				</form>
 			</div>
 		);
 	}
 }
 
-export default connect(null, { login })(Login);
+export default connect(null, { register })(Register);

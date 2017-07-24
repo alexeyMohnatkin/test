@@ -7,11 +7,13 @@ import updateUser from './users/updateUser';
 import addUser from './users/addUser';
 import deleteUser from './users/deleteUser';
 import auth from './auth/auth';
+import register from './auth/register';
 
 
 export default (app) => {
-	// app.use('/api/users', authMiddleware);
+	app.use('/api/users', authMiddleware);
 	app.use('/api/users', adminOnly);
+
 	app.route('/api/users')
 		.get(getUsersList)
 		.post(addUser);
@@ -23,6 +25,8 @@ export default (app) => {
 
 	app.route('/api/auth')
 		.post(auth);
+	app.route('/api/register')
+		.post(register);
 
 	app.route('/api/*')
 		.get((req, res) => {
