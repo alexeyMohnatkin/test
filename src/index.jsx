@@ -7,6 +7,7 @@ import styles from './styles.css';
 import Page from 'App/Modules/Layout/Page';
 import Home from 'App/Modules/Home/Components/Page';
 import Users from 'App/Modules/Users/Components/ListPage';
+import ViewUser from 'App/Modules/Users/Components/View';
 import EditUser from 'App/Modules/Users/Components/Edit';
 import AddUser from 'App/Modules/Users/Components/Add';
 import Login from 'App/Modules/Auth/Components/Login';
@@ -20,6 +21,7 @@ const App = () => (
 			<Page>
 				<Switch>
 					<Route exact path="/" component={Home}/>
+					<Route exact path="/user" component={ViewUser}/>
 					<Route exact path="/users" component={Users}/>
 					<Route exact path="/users/add" component={AddUser}/>
 					<Route exact path="/users/:id" component={EditUser}/>
