@@ -3,6 +3,7 @@
 import axios from 'axios';
 import t from './actionTypes';
 import getError from 'App/Util/getError';
+import localStorage from 'App/Util/localStorage';
 
 export function login(email: string, password: string) {
 	return async function(dispatch) {
