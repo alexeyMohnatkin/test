@@ -4,7 +4,6 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logout } from '../../actions';
-import Login from '../Login';
 
 import type { TReduxState } from 'App/Types/redux';
 
@@ -22,7 +21,7 @@ export default function(WrappedComponent: ReactClass<any>) {
 			router: PropTypes.object
 		};
 
-		componentWillMount() {
+		componentDidMount() {
 			if (!this.props.loggedIn) {
 				this.proceedToLogin();
 			}
