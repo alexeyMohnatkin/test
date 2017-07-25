@@ -10,7 +10,7 @@ export function loadList({ page=1, filter }: { page?: number, filter: any }) {
 		try {
 			const params = { page, filter };
 			const users = await axios({
-				url: 'http://localhost:3000/api/users',
+				url: '/api/users',
 				method: 'get',
 				params,
 			});
@@ -28,7 +28,7 @@ export function loadList({ page=1, filter }: { page?: number, filter: any }) {
 export function loadItem(id: string) {
 	return async function(dispatch) {
 		try {
-			const user = await axios.get(`http://localhost:3000/api/users/${id}`);
+			const user = await axios.get(`/api/users/${id}`);
 
 			return dispatch({
 				type: t.LOAD_ITEM,
@@ -46,7 +46,7 @@ export function addItem({ name, email, password }: TUser) {
 	return async function(dispatch) {
 		try {
 			return await axios({
-				url: 'http://localhost:3000/api/users',
+				url: '/api/users',
 				method: 'post',
 				data,
 			});
@@ -61,7 +61,7 @@ export function updateItem(id: string, { name, email, password }: TUser) {
 	return async function(dispatch) {
 		try {
 			return await axios({
-				url: `http://localhost:3000/api/users/${id}`,
+				url: `/api/users/${id}`,
 				method: 'put',
 				data,
 			});
@@ -76,7 +76,7 @@ export function deleteItem(id: string) {
 	return async function(dispatch) {
 		try {
 			return await axios({
-				url: `http://localhost:3000/api/users/${id}`,
+				url: `/api/users/${id}`,
 				method: 'delete',
 			});
 		} catch (error) {
